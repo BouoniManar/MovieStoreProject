@@ -18,17 +18,18 @@ namespace MovieProject.Models.Domain
         public string? Director { get; set; }
 
         [NotMapped]
+        [Required]
         public IFormFile? ImageFile { get; set; }
         [NotMapped]
         [Required]
-        public List<int> Genres { get; set; }
-       // [NotMapped]
+        public List<int>? Genres { get; set; }
+        [NotMapped]
         public IEnumerable<SelectListItem>? GenreList { get; set; }
-       // [NotMapped]
-       // public string ? GenreNames { get; set; }
+        [NotMapped]
+        public string ? GenreNames { get; set; }
 
-       // [NotMapped]
-       // public MultiSelectList ? MultiGenreList { get; set; }
+        [NotMapped]
+        public MultiSelectList ? MultiGenreList { get; set; }
 
     }
 }

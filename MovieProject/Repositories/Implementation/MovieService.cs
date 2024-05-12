@@ -11,32 +11,31 @@ namespace MovieProject.Repositories.Implementation
         {
             this.ctx = ctx;
         }
-
-        public int MovieId { get; private set; }
-        public int GenreId { get; private set; }
-
-        public bool Add(Movie model, int Id)
+        public bool Add(Movie model)
         {
             try
             {
+                
                 ctx.Movie.Add(model);
                 ctx.SaveChanges();
                 foreach (int genreId in model.Genres)
                 {
-                    var movieGenre = new MovieGenre();
+                    var movieGenre = new MovieGenre
                     {
-                        MovieId = model.Id;
-                        GenreId = genreId;
+                        MovieId = model.Id,
+                        GenreId = genreId
                     };
                     ctx.MovieGenre.Add(movieGenre);
                 }
                 ctx.SaveChanges();
+
                 return true;
+
             }
             catch (Exception ex)
             {
                 return false;
-            } 
+            }
         }
 
         public bool Delete(int id)
@@ -63,11 +62,24 @@ namespace MovieProject.Repositories.Implementation
 
         public MovieListVm List()
         {
-            var list = ctx.Movie.AsQueryable();
+            var list = ctx.Movie.ToList();
+            foreach (var movie in list)
+            {
+                var genres = (from genre in ctx.Genre
+                              join mg in ctx.MovieGenre
+                              on genre.Id equals mg.GenreId
+                              where mg.MovieId == movie.Id
+                              select genre.GenreName
+                              ).ToList();
+
+                var genreNames = string.Join(',', genres);
+                movie.GenreNames = genreNames;
+            }
             var data = new MovieListVm
             {
-                MovieList = list
+                MovieList = list.AsQueryable()
             };
+
             return data;
         }
 
@@ -85,29 +97,7 @@ namespace MovieProject.Repositories.Implementation
             }
         }
 
-        bool IMovieService.Add(Movie model)
-        {
-            throw new NotImplementedException();
-        }
 
-        bool IMovieService.Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
 
-        Movie IMovieService.GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        MovieListVm IMovieService.List()
-        {
-            throw new NotImplementedException();
-        }
-
-        bool IMovieService.Update(Movie model)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

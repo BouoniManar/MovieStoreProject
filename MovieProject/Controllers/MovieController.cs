@@ -3,17 +3,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MovieProject.Models.Domain;
 using MovieProject.Repositories.Abstract;
+using MovieProject.Repositories.Implementation;
 
 namespace MovieProject.Controllers
 {
     //[Authorize]
     public class MovieController : Controller
     {
-        private readonly IMovieService _movieService;
+        private readonly IMovieService _movieService,IFileService;
         private readonly IFileService _fileService;
         private readonly IGenreService _genreService;
 
-        public MovieController(IGenreService genreService ,IMovieService MovieService, IFileService fileService)
+        public MovieController(IMovieService MovieService, IFileService fileService, IGenreService genreService)
         {
             _movieService = MovieService;
             _fileService = fileService;
@@ -22,7 +23,7 @@ namespace MovieProject.Controllers
         public IActionResult Add()
         {
             var model = new Movie();
-            model.GenreList = _genreService.List().Select(a => new SelectListItem { Text = a.GenreName, Value = a.Id.ToString() });
+            model.GenreList = _genreService.List().Select(a => new SelectListItem { Text = a.GenreName, Value=a.Id.ToString()});
             return View(model);
         }
 
@@ -34,14 +35,13 @@ namespace MovieProject.Controllers
             if (!ModelState.IsValid)
                 return View(model);
             var fileReult = this._fileService.SaveImage(model.ImageFile);
-            if(fileReult.Item1 == 0)
+            if (fileReult.Item1 == 0)
             {
-                _ = TempData["msg"] + "File could not saved";
-            }
+                TempData["msg"] = "File could not saved";
 
+            }
             var imageName = fileReult.Item2;
             model.MovieImage = imageName;
-
             var result = _movieService.Add(model);
             if (result)
             {
