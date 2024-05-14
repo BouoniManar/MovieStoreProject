@@ -1,7 +1,67 @@
 ﻿@{
+    ViewData["Title"] = "About Us";
 }
 
-<h2>About Us</h2>
-<p>
-    Coming soon
-</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        /* Custom CSS */
+        body {
+            padding-top: 56px; /* Adjust according to your navbar height */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">Movie Store</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2> About Us</h2>
+                <p>
+                    Welcome to Movie Store! We are your one-stop destination for all things movies. Whether you're a cinephile or just looking for some entertainment, we've got you covered. Our extensive collection of movies spans across genres, ensuring there's something for everyone.
+                </p>
+                <p>
+                    At Movie Store, we are passionate about bringing the magic of cinema to your fingertips. Our team works tirelessly to curate the best selection of movies, keeping you up-to-date with the latest releases and timeless classics.
+                </p>
+                <p>
+                    Have a question or need assistance? Don't hesitate to reach out to our friendly customer support team. We're here to ensure your movie-watching experience is seamless and enjoyable.
+                </p>
+                <p>
+                    Thank you for choosing Movie Store. Sit back, relax, and enjoy the show!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery (required for Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"></script>
+</body>
+</html>

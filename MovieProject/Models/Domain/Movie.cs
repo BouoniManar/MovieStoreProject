@@ -18,7 +18,6 @@ namespace MovieProject.Models.Domain
         public string? Director { get; set; }
 
         [NotMapped]
-        [Required]
         public IFormFile? ImageFile { get; set; }
         [NotMapped]
         [Required]
